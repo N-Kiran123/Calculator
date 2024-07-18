@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="calsi.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* background-color: rgb(255, 255, 255); */
+            font-family: 'Roboto', sans-serif;
+            background-color: black;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calsi {
+            width: 280px;
+            background-color: #eeeeed;
+            padding: 20px;
+            border-radius: 17px;
+            box-shadow: rgb(127, 140, 141) 6px 12px;
+        }
+
+        .screen {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            width: 100%;
+            height: 70px;
+            padding-right: 5px;
+            margin-bottom: 10px;
+            text-align: right;
+            direction: ltr;
+            font-size: 3rem;
+            border: none;
+            box-shadow: rgb(127, 140, 141) 2px 2px;
+            z-index: 0;
+
+        }
+
+        .btn-group {
+            width: 100%;
+            height: 340px;
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn-group button {
+            background: #bdc3c7;
+            color: #2c3e50;
+            font-size: larger;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 17%;
+            /* box-shadow: rgb(127, 140, 141) 2px 4px; */
+            box-shadow: rgb(0, 0, 0) 2px 4px;
+            transition: all 0.2s ease 0s;
+        }
+
+        .btn:active {
+            background: #e66868;
+            color: #2c3e50;
+            font-size: larger;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 17%;
+            /* box-shadow: rgb(127, 140, 141) 2px 4px; */
+            box-shadow: rgb(0, 0, 0) 2px 4px;
+            transition: all 0.2s ease 0s;
+            /* transform: translateY(2px); */
+            transform: translate(2px, 4px);
+        }
+
+        .btn-group .operator {
+            background-color: rgb(249, 168, 37);
+            color: white;
+            font-size: larger;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 17%;
+            /* box-shadow: rgb(127, 140, 141) 2px 4px; */
+            box-shadow: rgb(0, 0, 0) 2px 4px;
+            transition: all 0.2s ease 0s;
+        }
+
+        .btn-group .operator:active {
+            transform: translate(2px, 4px);
+        }
+
+        .btn-group .equal {
+            background-color: rgb(46, 204, 113);
+            ;
+            color: white;
+            font-size: larger;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 17%;
+            /* box-shadow: rgb(127, 140, 141) 2px 4px; */
+            box-shadow: rgb(0, 0, 0) 2px 4px;
+            transition: all 0.2s ease 0s;
+        }
+
+        .btn-group .equal:active {
+            transform: translate(2px, 4px);
+        }
+
+        .btn-group .clear {
+            background-color: rgb(231, 76, 60);
+            color: white;
+            font-size: larger;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 17%;
+            /* box-shadow: rgb(127, 140, 141) 2px 4px; */
+            box-shadow: rgb(0, 0, 0) 2px 4px;
+            transition: all 0.2s ease 0s;
+        }
+
+        .btn-group .clear:active {
+            transform: translate(2px, 4px);
+        }
+    </style>
+    <title>Calsi</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="calsi">
+            <input type="text" class="screen">
+            <!-- <div class="calsi-btn">-->
+            <div class="btn-group">
+                <button type="button" class="btn">7</button>
+                <button type="button" class="btn">8</button>
+                <button type="button" class="btn">9</button>
+                <button type="button" class="btn operator">+</button>
+
+                <button type="button" class="btn">4</button>
+                <button type="button" class="btn">5</button>
+                <button type="button" class="btn">6</button>
+                <button type="button" class="btn operator">-</button>
+
+                <button type="button" class="btn">1</button>
+                <button type="button" class="btn">2</button>
+                <button type="button" class="btn">3</button>
+                <button type="button" class="btn operator">*</button>
+
+                <button type="button" class="btn">0</button>
+                <button type="button" class="btn operator">/</button>
+                <button type="button" class="btn equal">=</button>
+                <button type="button" class="btn clear">C</button>
+
+
+
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const screen = document.querySelector('.screen');
+            const buttons = document.querySelectorAll('.btn-group button');
+            let screenValue = '';
+
+            buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const buttonText = e.target.innerText;
+
+                    if (buttonText === 'C') {
+                        screenValue = '';
+                        screen.value = screenValue;
+                    } else if (buttonText === '=') {
+                        try {
+                            screen.value = eval(screenValue);
+                        } catch (e) {
+                            screen.value = 'Error';
+                        }
+                    } else {
+                        screenValue += buttonText;
+                        screen.value = screenValue;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
